@@ -131,7 +131,7 @@ Further requirements:
 - Javascript & PHP variables in camelCase.
 - Make sure that your code is readable for others and include comments in important places. (Guideline: Code = How?, Comment = What?)
 
-- There are a few pre-built Javascript functions in the helper.js file to help you work with AJAX. You can use them, but you don't have to. But please stick to using Jquery.
+- Stick to using Jquery.
 
 ## When you are done 🎖️
 

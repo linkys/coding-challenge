@@ -13,9 +13,7 @@ PLEASE NOTE: For us the most important aspect we are looking for in the code cha
 - JQuery
 - MySQL
 
-Please use the given UI componentes / blade files for the frontend, and focus on the backend only with a bit of Jquery.
-
-The project in production is very similar: A Laravel 8 monolith + Bootsrap + Jquery. In the future, however, the whole thing will probably be rewritten to a REST API + Flutter / React Native.
+Please use the given UI componentes / blade files for the frontend.
 
 ## Getting Started 🏃
 

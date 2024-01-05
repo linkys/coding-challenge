@@ -9,6 +9,6 @@
 
   <div class="container">
     <x-dashboard />
-    <x-network_connections />
+    <x-network_connections :counts="$counts" />
   </div>
 @endsection

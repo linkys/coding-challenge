@@ -2,27 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\ConnectionRequestService;
+use App\Services\ConnectionService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    public function __construct(
+        public ConnectionService $connectionService,
+        public ConnectionRequestService $connectionRequestService,
+    ) {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function index(): View
     {
-        return view('home');
+        $user = Auth::user();
+
+        $counts = [
+            'suggestionsCount' => $this->connectionService->getSuggestionsForUser(Auth::user())->count(),
+            'sentRequestsCount' => $this->connectionRequestService->getSentRequestsForUser(Auth::user())->count(),
+            'receivedRequestsCount' => $this->connectionRequestService->getReceivedRequestsForUser(Auth::user())->count(),
+            'connectionsCount' => $user->connections()->count(),
+        ];
+
+        return view('home', compact('counts'));
     }
 }

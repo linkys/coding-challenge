@@ -2,18 +2,27 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
+        $mainUser = User::factory()
+            ->hasStraightConnections(120)
+            ->hasSentRequests(20)
+            ->hasReceivedRequests(45)
+            ->create([
+                'name' => 'Main User',
+                'email' => 'root@root.com',
+            ]);
 
+        $commonUser = User::factory()->create();
+        $connectedUsers = $mainUser->connections()->take(25)->add($mainUser);
+
+        foreach ($connectedUsers as $connectedUser) {
+            $commonUser->straightConnections()->attach($connectedUser);
+        }
     }
 }
